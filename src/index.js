@@ -1,4 +1,8 @@
-import { bro } from  './bro';
-import './styles/main.scss';
+import "bootstrap";
 
-console.log(bro('Dude'))
+import "@fortawesome/fontawesome-free/js/fontawesome";
+import "@fortawesome/fontawesome-free/js/solid";
+import "@fortawesome/fontawesome-free/js/regular";
+import "@fortawesome/fontawesome-free/js/brands";
+
+import "./styles/main.scss";
