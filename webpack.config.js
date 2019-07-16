@@ -45,7 +45,8 @@ module.exports = {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "images/"
+              outputPath: "img/", //The file location
+              publicPath: "img/" //The path reference in the links
             }
           }
         ]
@@ -93,15 +94,15 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebPackPlugin({
-      template: "./src/index.html",
-      filename: "./index.html"
-    }),
     new MiniCssExtractPlugin({
       //options similar to same options in WebpackOptions.output
       //both options are optional
       filename: "[name].css",
       chunckFilename: "[id].css"
+    }),
+    new HtmlWebPackPlugin({
+      template: "./src/index.html",
+      filename: "./index.html"
     })
   ]
 };
