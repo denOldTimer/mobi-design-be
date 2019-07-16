@@ -1,7 +1,5 @@
-
 //Fonts
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
 
 //Custom Variables
 @import "variables";
@@ -9,12 +7,8 @@
 //bootstrap
 @import "~bootstrap/scss/bootstrap";
 
-
-body{
+body {
     font-family: 'Poppins', sans-serif;
+    font-weight: 500;
     background: #a79f9f;
 }
-
-
-
-

@@ -1,20 +1,42 @@
+const path = require("path");
+const webpack = require("webpack");
+const autoprefixer = require("autoprefixer");
+const postcssImport = require("postcss-import");
+const precss = require("precss");
+//plugins
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const autoprefixer = require("autoprefixer");
-const precss = require("precss");
+const TerserJSPlugin = require("terser-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
+  //mode: "production",
   mode: "development",
+  optimization: {
+    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: [{ loader: "babel-loader" }]
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-env"]
+            }
+          }
+        ]
       },
       {
         test: /\.html$/,
-        use: [{ loader: "html-loader", options: { minimize: true } }]
+        use: [
+          {
+            loader: "html-loader",
+            options: { minimize: true }
+          }
+        ]
       },
       {
         test: /\.(png|svg|jpe?g|gif)$/,
@@ -29,15 +51,16 @@ module.exports = {
         ]
       },
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         use: [
-          { loader: "style-loader" },
+          MiniCssExtractPlugin.loader,
+          // { loader: "style-loader" },
           { loader: "css-loader" },
           {
             loader: "postcss-loader",
             options: {
               plugins: function() {
-                return [require("precss"), require("autoprefixer")];
+                return [precss(), postcssImport(), autoprefixer()];
               }
             }
           },
